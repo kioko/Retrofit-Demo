@@ -14,6 +14,9 @@
 package com.thomaskioko.retrofitdemo.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.thomaskioko.retrofitdemo.R;
 import com.thomaskioko.retrofitdemo.data.Movie;
 
@@ -78,6 +83,7 @@ public class ListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.movie_item_layout, null);
 
         holder = new MovieViewHolder();
+        holder.cardView = (CardView) convertView.findViewById(R.id.card_view);
         holder.thumbNail = (ImageView) convertView.findViewById(R.id.album_artwork);
         holder.title = (TextView) convertView.findViewById(R.id.movie_title);
         holder.genre = (TextView) convertView.findViewById(R.id.movie_genre);
@@ -96,6 +102,29 @@ public class ListAdapter extends BaseAdapter {
                 genreStr.length() - 2) : genreStr;
         holder.genre.setText(genreStr);
 
+
+        Glide.with(holder.thumbNail.getContext())
+                .load(movie.getImage())
+                .asBitmap()
+                .into(new BitmapImageViewTarget(holder.thumbNail) {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                        super.onResourceReady(bitmap, anim);
+                        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                if (palette.getDarkVibrantSwatch() != null) {
+                                    holder.cardView.setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
+
+                                } else if (palette.getMutedSwatch() != null) {
+                                    holder.cardView.setBackgroundColor(palette.getMutedSwatch().getRgb());
+                                }
+                            }
+                        });
+                    }
+                });
+
+
         return convertView;
     }
 
@@ -109,6 +138,7 @@ public class ListAdapter extends BaseAdapter {
         ImageView thumbNail;
         TextView title;
         TextView genre;
+        CardView cardView;
     }
 
 }
