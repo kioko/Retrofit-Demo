@@ -64,11 +64,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxLength="15"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:gravity="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="@dimen/font_margin_medium" />
 
@@ -76,9 +76,9 @@
                 android:id="@+id/movie_genre"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:paddingTop="2dp"
                 android:singleLine="true"
-                android:gravity="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="@dimen/font_margin_standard" />
         </LinearLayout>
