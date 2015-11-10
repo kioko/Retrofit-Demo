@@ -1,15 +1,29 @@
 package com.thomaskioko.retrofitdemo;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.etsy.android.grid.StaggeredGridView;
+import com.thomaskioko.retrofitdemo.adapter.ListAdapter;
+import com.thomaskioko.retrofitdemo.api.ApiClient;
+import com.thomaskioko.retrofitdemo.data.Movie;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static String LOG_TAG = MainActivity.class.getSimpleName();
+    private List<Movie> mMovieList = new ArrayList<>();
+    private StaggeredGridView mGridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +32,37 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
+
+        getMovies();
+
+    }
+
+    /**
+     * This method gets the Movie Schedule Times
+     */
+    public void getMovies() {
+
+        ApiClient.getApiClient().getMovies(new Callback<List<Movie>>() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void success(List<Movie> movie, Response response) {
+
+                Log.i(LOG_TAG, "@getMovieSchedules-success: Response Headers :: " + response.getHeaders());
+                Log.i(LOG_TAG, "@getMovieSchedules-success: Response Status :: " + response.getStatus());
+
+                for (Movie mMovie : movie) {
+
+                    mMovieList.add(mMovie);
+
+                    if (mMovieList != null) {
+                        mGridView.setAdapter(new ListAdapter(getApplicationContext(), mMovieList));
+                    }
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
     }
