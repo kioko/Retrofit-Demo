@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void getMovies() {
 
-        ApiClient.getApiClient().getMovies(new Callback<List<Movie>>() {
+        ApiClient apiClient = new ApiClient();
+        apiClient.setIsDebug(false); //Set True to enable logging, false to disable.
+        apiClient.movieServices().getMovies(new Callback<List<Movie>>() {
             @Override
             public void success(List<Movie> movie, Response response) {
 
