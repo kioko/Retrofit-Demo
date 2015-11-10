@@ -1,13 +1,13 @@
-package com.thomaskioko.retrofitdemo;
+package com.thomaskioko.retrofitdemo.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.thomaskioko.retrofitdemo.R;
 import com.thomaskioko.retrofitdemo.adapter.ListAdapter;
 import com.thomaskioko.retrofitdemo.api.ApiClient;
 import com.thomaskioko.retrofitdemo.data.Movie;
@@ -21,7 +21,6 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static String LOG_TAG = MainActivity.class.getSimpleName();
     private List<Movie> mMovieList = new ArrayList<>();
     private StaggeredGridView mGridView;
 
@@ -35,11 +34,10 @@ public class MainActivity extends AppCompatActivity {
         mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
 
         getMovies();
-
     }
 
     /**
-     * This method gets the Movie Schedule Times
+     * This method gets the Movie
      */
     public void getMovies() {
 
@@ -47,22 +45,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void success(List<Movie> movie, Response response) {
 
-                Log.i(LOG_TAG, "@getMovieSchedules-success: Response Headers :: " + response.getHeaders());
-                Log.i(LOG_TAG, "@getMovieSchedules-success: Response Status :: " + response.getStatus());
-
                 for (Movie mMovie : movie) {
-
                     mMovieList.add(mMovie);
-
                     if (mMovieList != null) {
                         mGridView.setAdapter(new ListAdapter(getApplicationContext(), mMovieList));
                     }
                 }
             }
-
             @Override
             public void failure(RetrofitError error) {
-
             }
         });
     }
