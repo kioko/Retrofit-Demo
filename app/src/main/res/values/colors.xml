@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#33B5E5</color>
-    <color name="colorPrimaryDark">#33B5E5</color>
+    <color name="colorPrimaryDark">#178ab4</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#fa6a6a</color>
 
