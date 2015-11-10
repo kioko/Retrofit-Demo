@@ -52,20 +52,6 @@ public class ListAdapter extends BaseAdapter {
         this.mMovieList = followerList;
     }
 
-
-    /**
-     * This class uses A ViewHolder object stores to each of the component views inside the tag field
-     * of the Layout, so you can immediately access them without the need to look them up repeatedly.
-     * <p/>
-     * {@see <a href="http://developer.android.com/training/improving-layouts/smooth-scrolling.html</a>}
-     */
-    public static class MovieViewHolder {
-        ImageView thumbNail;
-        TextView title;
-        TextView genre;
-    }
-
-
     @Override
     public int getCount() {
         return mMovieList.size();
@@ -111,6 +97,18 @@ public class ListAdapter extends BaseAdapter {
         holder.genre.setText(genreStr);
 
         return convertView;
+    }
+
+    /**
+     * This class uses A ViewHolder object stores to each of the component views inside the tag field
+     * of the Layout, so you can immediately access them without the need to look them up repeatedly.
+     * <p/>
+     * {@see <a href="http://developer.android.com/training/improving-layouts/smooth-scrolling.html</a>}
+     */
+    public static class MovieViewHolder {
+        ImageView thumbNail;
+        TextView title;
+        TextView genre;
     }
 
 }
