@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':staggerGridLib'
+project(':staggerGridLib').projectDir = new File('Libraries/staggerGridLib')
