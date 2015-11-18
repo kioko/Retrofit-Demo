@@ -16,7 +16,7 @@ test:
     # copy the build outputs to artifacts
     - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
-     - cp -r RetrofitDemo/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+#     - cp -r RetrofitDemo/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 #Test Build
 test:
   override:
