@@ -14,9 +14,9 @@ test:
     # run tests  against the emulator.
     - ./gradlew connectedAndroidTest
     # copy the build outputs to artifacts
-    # - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
+    - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
-    # - cp -r RetrofitDemo/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+     - cp -r RetrofitDemo/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 #Test Build
 test:
   override:
@@ -25,5 +25,5 @@ test:
 test:
   override:
     - ./gradlew assembleRelease
-    # - cp -r RetrofitDemo/build/outputs/apk/
+    - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
 
