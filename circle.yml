@@ -1,3 +1,7 @@
+# Artifacts
+general:
+    artifacts:
+        - /home/ubuntu/RetrofitDemo/app/build/outputs/apk/
 # Example test config to test the APK and save artifacts and reports for the test
 test:
   override:
@@ -21,5 +25,5 @@ test:
 test:
   override:
     - ./gradlew assembleRelease
-    - cp -r RetrofitDemo/build/outputs/apk/
+    # - cp -r RetrofitDemo/build/outputs/apk/
 
