@@ -1,7 +1,11 @@
 # Artifacts
 general:
-    artifacts:
-        - /home/ubuntu/RetrofitDemo/app/build/outputs/apk/
+  artifacts:
+    - "~/build_output.zip" # Save APK's, Lint Results, and Test Results
+
+test:
+  override:
+    - zip -r ~/build_output.zip app/build/outputs/
 # Example test config to test the APK and save artifacts and reports for the test
 test:
   override:
@@ -14,7 +18,7 @@ test:
     # run tests  against the emulator.
     - ./gradlew connectedAndroidTest
     # copy the build outputs to artifacts
-    - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
+#    - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
 #     - cp -r RetrofitDemo/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 #Test Build
@@ -25,5 +29,5 @@ test:
 test:
   override:
     - ./gradlew assembleRelease
-    - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
+#    - cp -r RetrofitDemo/build/outputs $CIRCLE_ARTIFACTS
 
