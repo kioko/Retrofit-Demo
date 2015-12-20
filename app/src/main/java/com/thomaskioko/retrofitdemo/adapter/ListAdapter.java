@@ -13,6 +13,7 @@
  */
 package com.thomaskioko.retrofitdemo.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.graphics.Palette;
@@ -72,6 +73,7 @@ public class ListAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final MovieViewHolder holder;
