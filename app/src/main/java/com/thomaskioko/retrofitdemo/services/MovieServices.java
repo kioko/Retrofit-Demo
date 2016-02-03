@@ -19,7 +19,7 @@ import retrofit.http.GET;
 public interface MovieServices {
 
     /**
-     * Get movies
+     * Get movie callback.
      *
      * @param movieDayScheduleCallback MovieDaySchedule object
      */
