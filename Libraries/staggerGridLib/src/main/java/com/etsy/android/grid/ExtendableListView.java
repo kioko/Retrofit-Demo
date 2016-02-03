@@ -253,6 +253,7 @@ public abstract class ExtendableListView extends AbsListView {
 
     @Override
     protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
+        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
         // TODO : handle focus and its impact on selection - if we add item selection support
     }
 
@@ -2173,7 +2174,7 @@ public abstract class ExtendableListView extends AbsListView {
             // Force one here to make sure that the state of the list matches
             // the state of the adapter.
             if (mDataChanged) {
-                this.onLayout(false, getLeft(), getTop(), getRight(), getBottom());
+                this.layout(getLeft(), getTop(), getRight(), getBottom());
             }
         }
         else {
