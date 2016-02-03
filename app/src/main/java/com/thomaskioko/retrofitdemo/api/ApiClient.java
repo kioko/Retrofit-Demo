@@ -1,10 +1,7 @@
 package com.thomaskioko.retrofitdemo.api;
 
-import com.squareup.okhttp.OkHttpClient;
 import com.thomaskioko.retrofitdemo.services.MovieServices;
 import com.thomaskioko.retrofitdemo.utils.ApplicationConstants;
-
-import java.util.concurrent.TimeUnit;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -19,36 +16,8 @@ import retrofit.converter.GsonConverter;
 
 public class ApiClient {
 
-    private static MovieServices movieServices;
-    private static OkHttpClient okHttpClient = new OkHttpClient();
     private RestAdapter restAdapter;
     private boolean isDebug;
-
-    /**
-     * This method adds parameter to the RestAdapter. e.g Timeout Duration
-     *
-     * @return okHttpClient
-     */
-    public static OkHttpClient getOkHttpClient() {
-        okHttpClient.setConnectTimeout(ApplicationConstants.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttpClient.setWriteTimeout(ApplicationConstants.WRITE_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttpClient.setReadTimeout(ApplicationConstants.READ_TIMEOUT, TimeUnit.MILLISECONDS);
-        return okHttpClient;
-    }
-
-    public static MovieServices getApiClient() {
-        if (movieServices == null) {
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(ApplicationConstants.END_POINT)
-                    .setClient(new OkClient(getOkHttpClient()))
-                    .setLogLevel(RestAdapter.LogLevel.FULL)
-                    .build();
-
-            movieServices = restAdapter.create(MovieServices.class);
-        }
-
-        return movieServices;
-    }
 
     /**
      * Set the {@link RestAdapter} log level.
@@ -104,7 +73,11 @@ public class ApiClient {
         return restAdapter;
     }
 
-
+    /**
+     * Create Movie service instance.
+     *
+     * @return Movie Service.
+     */
     public MovieServices movieServices() {
         return getRestAdapter().create(MovieServices.class);
     }
