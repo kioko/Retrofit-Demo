@@ -33,9 +33,9 @@ public class ApiHelper {
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
     /**
-     * Time zone for Trakt dates.
+     * Time zone.
      */
-    private static final TimeZone TRAKT_TIME_ZONE = TimeZone.getTimeZone("GMT-8:00");
+    private static final TimeZone TIME_ZONE = TimeZone.getTimeZone("GMT-8:00");
 
     private static final long SECOND_IN_MILLISECONDS = 1000;
 
@@ -90,7 +90,7 @@ public class ApiHelper {
             @Override
             public Calendar deserialize(JsonElement json, Type typeOfT,
                                         JsonDeserializationContext context) throws JsonParseException {
-                Calendar value = Calendar.getInstance(TRAKT_TIME_ZONE);
+                Calendar value = Calendar.getInstance(TIME_ZONE);
                 value.setTimeInMillis(json.getAsLong() * SECOND_IN_MILLISECONDS);
                 return value;
             }
