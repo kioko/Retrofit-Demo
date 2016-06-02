@@ -15,23 +15,28 @@ import com.thomaskioko.retrofitdemo.data.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    @Bind(R.id.grid_view)
+    StaggeredGridView mGridView;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     private List<Movie> mMovieList = new ArrayList<>();
-    private StaggeredGridView mGridView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
-        mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
+        setSupportActionBar(toolbar);
 
         getMovies();
     }
