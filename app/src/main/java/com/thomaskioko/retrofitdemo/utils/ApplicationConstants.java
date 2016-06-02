@@ -11,7 +11,7 @@ public class ApplicationConstants {
     /**
      * API Endpoint
      */
-    public static final String END_POINT = "http://api.androidhive.info/json";
+    public static final String END_POINT = "http://api.androidhive.info/json/";
     /**
      * Connection timeout duration
      */
