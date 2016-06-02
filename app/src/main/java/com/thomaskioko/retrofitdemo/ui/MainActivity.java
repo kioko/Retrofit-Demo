@@ -15,9 +15,9 @@ import com.thomaskioko.retrofitdemo.data.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,15 +39,17 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method gets the Movie
      */
-    public void getMovies() {
+    private void getMovies() {
 
         ApiClient apiClient = new ApiClient();
-        apiClient.setIsDebug(false); //Set True to enable logging, false to disable.
-        apiClient.movieServices().getMovies(new Callback<List<Movie>>() {
-            @Override
-            public void success(List<Movie> movie, Response response) {
+        apiClient.setIsDebug(true); //Set True to enable logging, false to disable.
 
-                for (Movie mMovie : movie) {
+        Call<List<Movie>> listCall = apiClient.movieServices().getMovies();
+        listCall.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, retrofit2.Response<List<Movie>> response) {
+
+                for (Movie mMovie : response.body()) {
                     mMovieList.add(mMovie);
                     if (mMovieList != null) {
                         mGridView.setAdapter(new ListAdapter(getApplicationContext(), mMovieList));
@@ -56,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+
             }
         });
+
     }
 
     @Override

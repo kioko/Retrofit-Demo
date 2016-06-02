@@ -5,8 +5,9 @@ import com.thomaskioko.retrofitdemo.data.Movie;
 
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.http.GET;
+import retrofit2.Call;
+import retrofit2.http.GET;
+
 
 /**
  * This class contains API functions
@@ -20,10 +21,8 @@ public interface MovieServices {
 
     /**
      * Get movie callback.
-     *
-     * @param movieDayScheduleCallback MovieDaySchedule object
      */
-    @GET("/movies.json")
-    void getMovies(Callback<List<Movie>> movieDayScheduleCallback);
+    @GET("movies.json")
+    Call<List<Movie>> getMovies();
 
 }
